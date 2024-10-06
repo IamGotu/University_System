@@ -5,73 +5,82 @@ session_start();
 // Include the database connection
 include("../database/db_connect.php");
 
-// Check if the 'add_department' form was submitted
-if (isset($_POST['add_department'])) {
+// Check if the 'add_course' form was submitted
+if (isset($_POST['add_course'])) {
+    $course_id = $_POST['course_id'];
+    $title = $_POST['title'];
     $dept_name = $_POST['dept_name'];
-    $building = $_POST['building'];
-    $budget = $_POST['budget'];
+    $credits = $_POST['credits'];
 
-    // Check if the department already exists
-    $check_sql = "SELECT * FROM department WHERE dept_name='$dept_name'";
+    // Check if the course already exists
+    $check_sql = "SELECT * FROM course WHERE course_id='$course_id'";
     $check_result = $conn->query($check_sql);
 
     if ($check_result->num_rows > 0) {
-        // If department already exists, set an error message
+        // If course already exists, set an error message
         $_SESSION['status'] = 'error';
-        $_SESSION['message'] = 'Department already exists';
+        $_SESSION['message'] = 'Course already exists';
     } else {
-        // Insert the new department into the database
-        $sql = "INSERT INTO department (dept_name, building, budget) VALUES ('$dept_name', '$building', '$budget')";
+        // Insert the new course into the database
+        $sql = "INSERT INTO course (course_id, title, dept_name, credits) VALUES ('$course_id', '$title', '$dept_name', '$credits')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
-            $_SESSION['message'] = 'Department added successfully';
+            $_SESSION['message'] = 'Course added successfully';
         } else {
             $_SESSION['status'] = 'error';
             $_SESSION['message'] = 'Error: ' . $conn->error;
         }
     }
-    header('Location: department_form.php');
+    header('Location: course_form.php');
     exit();
 }
 
-// Check if the 'update_department' form was submitted
-if (isset($_POST['update_department'])) {
+// Check if the 'update_course' form was submitted
+if (isset($_POST['update_course'])) {
+    $course_id = $_POST['course_id']; // Current course_id
+    $new_course_id = $_POST['new_course_id']; // New course_id
+    $title = $_POST['title'];
     $dept_name = $_POST['dept_name'];
-    $building = $_POST['building'];
-    $budget = $_POST['budget'];
+    $credits = $_POST['credits'];
 
-    // Ensure that you're not updating to a duplicate department
-    $check_sql = "SELECT * FROM department WHERE dept_name='$dept_name'";
+    // Check if the new course_id already exists
+    $check_sql = "SELECT * FROM course WHERE course_id='$new_course_id' AND course_id != '$course_id'";
     $check_result = $conn->query($check_sql);
 
-        // Update the department data in the database
-        $sql = "UPDATE department SET building='$building', budget='$budget' WHERE dept_name='$dept_name'";
+    // Only proceed if the new course_id does not exist
+    if ($check_result->num_rows === 0) {
+        // Update the course data in the database
+        $sql = "UPDATE course SET course_id='$new_course_id', title='$title', dept_name='$dept_name', credits='$credits' WHERE course_id='$course_id'";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
-            $_SESSION['message'] = 'Department updated successfully';
+            $_SESSION['message'] = 'Course updated successfully';
         } else {
             $_SESSION['status'] = 'error';
             $_SESSION['message'] = 'Error: ' . $conn->error;
         }
+    } else {
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Course ID already exists';
+    }
 
-    header('Location: department_form.php');
+    header('Location: course_form.php');
     exit();
 }
 
-// Check if the 'delete_department' form was submitted
-if (isset($_POST['delete_department'])) {
-    $dept_name = $_POST['dept_name'];
+// Check if the 'delete_course' form was submitted
+if (isset($_POST['delete_course'])) {
+    $course_id = $_POST['course_id'];
 
-    // Delete the department from the database
-    $sql = "DELETE FROM department WHERE dept_name='$dept_name'";
+    // Delete the course from the database
+    $sql = "DELETE FROM course WHERE course_id='$course_id'";
     if ($conn->query($sql) === TRUE) {
         $_SESSION['status'] = 'success';
-        $_SESSION['message'] = 'Department deleted successfully';
+        $_SESSION['message'] = 'Course deleted successfully';
     } else {
         $_SESSION['status'] = 'error';
         $_SESSION['message'] = 'Error: ' . $conn->error;
     }
-    header('Location: department_form.php');
+    header('Location: course_form.php');
     exit();
 }
 

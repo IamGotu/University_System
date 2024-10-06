@@ -74,10 +74,11 @@ if ($result_classrooms->num_rows > 0) {
 
                     <label for="budget">Budget:</label>
                     <input type="text" id="budget" name="budget" required><br><br>
-
-                    <input type="submit" name="add_department" value="Add Department">
-
-                    <button type="button" id="cancelAddBtn">Cancel</button>
+                    
+                    <div class="button-container">
+                        <input type="submit" name="add_department" value="Add Department">
+                        <button type="button" id="cancelAddBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -140,9 +141,10 @@ if ($result_classrooms->num_rows > 0) {
                     <label for="edit-budget">Budget:</label>
                     <input type="text" id="edit-budget" name="budget" required><br><br>
 
-                    <input type="submit" name="update_department" value="Update Department">
-
-                    <button type="button" id="cancelEditBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="update_department" value="Update Department">
+                        <button type="button" id="cancelEditBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -156,9 +158,10 @@ if ($result_classrooms->num_rows > 0) {
                 <form method="POST" action="/department/department_function.php">                    
                     <input type="hidden" id="delete-dept_name" name="dept_name">
 
-                    <input type="submit" name="delete_department" value="Delete Department">
-
-                    <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="delete_department" value="Delete Department">
+                        <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

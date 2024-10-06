@@ -57,9 +57,10 @@ $result = $conn->query($sql);
                     <label for="capacity">Capacity:</label>
                     <input type="text" id="capacity" name="capacity"><br><br>
 
-                    <input type="submit" name="add_classroom" value="Add Classroom">
-
-                    <button type="button" id="cancelAddBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="add_classroom" value="Add Classroom">
+                        <button type="button" id="cancelAddBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -114,9 +115,10 @@ $result = $conn->query($sql);
                     <label for="edit-capacity">Capacity:</label>
                     <input type="text" id="edit-capacity" name="capacity" required><br><br>
 
-                    <input type="submit" name="update_classroom" value="Update Classroom">
-
-                    <button type="button" id="cancelEditBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="update_classroom" value="Update Classroom">
+                        <button type="button" id="cancelEditBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -132,9 +134,10 @@ $result = $conn->query($sql);
 
                     <input type="hidden" id="delete-room_number" name="room_number">
 
-                    <input type="submit" name="delete_classroom" value="Delete Classroom">
-
-                    <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="delete_classroom" value="Delete Classroom">
+                        <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>

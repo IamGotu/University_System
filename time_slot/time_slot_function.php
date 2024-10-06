@@ -12,16 +12,25 @@ if (isset($_POST['add_time_slot'])) {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Insert the new time_slot into the database
-    $sql = "INSERT INTO time_slot (time_slot_id, day, start_time, end_time) VALUES ('$time_slot_id', '$day', '$start_time', '$end_time')";
-    if ($conn->query($sql) === TRUE) {
-        $_SESSION['status'] = 'success';
-        $_SESSION['message'] = 'Time Slot added successfully';
-    } else {
-        $_SESSION['status'] = 'error';
-        $_SESSION['message'] = 'Error: ' . $conn->error;
-    }
+    // Check if the combination of time_slot_id, day, start_time, and end_time already exists
+    $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$time_slot_id' AND day='$day' AND start_time='$start_time' AND end_time='$end_time'";
+    $check_result = $conn->query($check_sql);
 
+    // Only proceed to insert if the combination does not already exist
+    if ($check_result->num_rows > 0) {
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Time slot ID already exists';
+    } else {
+        // Insert the new time slot into the database
+        $sql = "INSERT INTO time_slot (time_slot_id, day, start_time, end_time) VALUES ('$time_slot_id', '$day', '$start_time', '$end_time')";
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['status'] = 'success';
+            $_SESSION['message'] = 'Time Slot added successfully';
+        } else {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'Error: ' . $conn->error;
+        }
+    }
     header('Location: time_slot_form.php');
     exit();
 }
@@ -34,25 +43,41 @@ if (isset($_POST['update_time_slot'])) {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Ensure that you're not updating to a duplicate department
-    $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$new_time_slot_id' AND day='$day' AND start_time='$start_time' AND end_time='$end_time' AND NOT time_slot_id='$time_slot_id'";
+    // Check if the new_time_slot_id already exists in another row
+    if ($time_slot_id !== $new_time_slot_id) {
+        $check_id_sql = "SELECT * FROM time_slot WHERE time_slot_id = '$new_time_slot_id'";
+        $check_id_result = $conn->query($check_id_sql);
+        
+        if ($check_id_result->num_rows > 0) {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'The new Time Slot ID already exists. Please use a different ID.';
+            header('Location: time_slot_form.php');
+            exit();
+        }
+    }
+
+    // Check if the combination of day, start_time, and end_time already exists in another row
+    $check_sql = "SELECT * FROM time_slot 
+                  WHERE time_slot_id = '$new_time_slot_id' AND time_slot_id != '$time_slot_id'";
     $check_result = $conn->query($check_sql);
 
-    // Only proceed if the new building and room_number do not exist
-    if ($check_result->num_rows === 0) {
-        // Update the time_slot data in the database
-        $sql = "UPDATE time_slot SET time_slot_id='$new_time_slot_id', day='$day', start_time='$start_time', end_time='$end_time' WHERE time_slot_id='$time_slot_id'";
-        
+    if ($check_result->num_rows > 0) {
+        // Prevent updating if the combination already exists
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Time slot already exists.';
+    } else {
+        // Proceed with updating the time_slot data, including time_slot_id if necessary
+        $sql = "UPDATE time_slot 
+                SET time_slot_id='$new_time_slot_id', day='$day', start_time='$start_time', end_time='$end_time' 
+                WHERE time_slot_id='$time_slot_id'";
+
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Time Slot updated successfully';
         } else {
             $_SESSION['status'] = 'error';
-            $_SESSION['message'] = 'Error: ' . $conn->error; // Capture specific error message
+            $_SESSION['message'] = 'Error: ' . $conn->error;
         }
-    } else {
-        $_SESSION['status'] = 'error';
-        $_SESSION['message'] = 'Tims slot already exists';
     }
 
     header('Location: time_slot_form.php');

@@ -179,7 +179,7 @@ $result = $conn->query($sql);
                     <input type="hidden" id="edit-time_slot_id" name="time_slot_id">
 
                     <label for="edit-new_time_slot_id">Time Slot ID:</label>
-                    <select id="edit-new_time_slot_id" name="edit-new_time_slot_id" required>
+                    <select id="edit-new_time_slot_id" name="new_time_slot_id" required>
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -192,7 +192,7 @@ $result = $conn->query($sql);
                     <br><br>
 
                     <label for="edit-day">Day:</label>
-                    <select id="edit-day" name="edit-day" required>
+                    <select id="edit-day" name="day" required>
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
@@ -204,7 +204,7 @@ $result = $conn->query($sql);
                     <br><br>
 
                     <label for="edit-start_time">Start Time:</label>
-                    <select id="edit-start_time" name="edit-start_time" required>
+                    <select id="edit-start_time" name="start_time" required>
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
@@ -226,7 +226,7 @@ $result = $conn->query($sql);
                     <br><br>
 
                     <label for="edit-end_time">End Time:</label>
-                    <select id="edit-end_time" name="edit-end_time" required>
+                    <select id="edit-end_time" name="end_time" required>
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
@@ -263,7 +263,6 @@ $result = $conn->query($sql);
                 <p>Are you sure you want to delete this time slot?</p>
                 <form method="POST" action="/time_slot/time_slot_function.php">
                     <input type="hidden" id="delete-time_slot_id" name="time_slot_id">
-
                     <div class="button-container">
                         <input type="submit" name="delete_time_slot" value="Delete Time Slot">
                         <button type="button" id="cancelDeleteBtn">Cancel</button>
@@ -275,7 +274,6 @@ $result = $conn->query($sql);
 </body>
 </html>
 
-<script src="../resources/js/script.js"></script>
 <script>
     // Get all edit buttons
     var editButtons = document.getElementsByClassName("edit-btn");
@@ -308,6 +306,7 @@ $result = $conn->query($sql);
         }
     }
 </script>
+<script src="../resources/js/script.js"></script>
 
 <?php
 // Close the database connection

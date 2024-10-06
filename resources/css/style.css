@@ -132,6 +132,28 @@ input[type="submit"], button {
     gap: 10px; /* Space between buttons */
 }
 
+select {
+    padding: 10px; /* Space inside the dropdown */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 16px; /* Font size */
+    background-color: #f8f8f8; /* Background color */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Change border color on focus */
+select:focus {
+    border-color: #007bff; /* Border color when focused */
+    outline: none; /* Remove outline */
+}
+
+/* Optional: style the option elements */
+option {
+    padding: 10px; /* Space inside the option */
+}
+
 /* Success and Error Message Styles */
 .success {
     background-color: #d4edda;

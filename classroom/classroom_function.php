@@ -37,11 +37,22 @@ if (isset($_POST['add_classroom'])) {
 // Check if the 'update_classroom' form was submitted
 if (isset($_POST['update_classroom'])) {
     $building = $_POST['building'];
+    $new_building = $_POST['new_building']; // New building
     $room_number = $_POST['room_number'];
+    $new_room_number = $_POST['new_room_number']; // New room_number
     $capacity = $_POST['capacity'];
 
+    // Check if the new building and room_number already exist
+    $check_sql = "SELECT * FROM classroom WHERE (building='$new_building' AND room_number='$new_room_number') 
+                  AND NOT (building='$building' AND room_number='$room_number')";
+    $check_result = $conn->query($check_sql);
+
+    // Only proceed if the new building and room_number do not exist
+    if ($check_result->num_rows === 0) {
         // Update the classroom data in the database
-        $sql = "UPDATE classroom SET capacity='$capacity' WHERE building='$building' AND room_number='$room_number'";
+        $sql = "UPDATE classroom SET building='$new_building', room_number='$new_room_number', capacity='$capacity' 
+                WHERE building='$building' AND room_number='$room_number'";
+        
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Classroom updated successfully';
@@ -49,9 +60,14 @@ if (isset($_POST['update_classroom'])) {
             $_SESSION['status'] = 'error';
             $_SESSION['message'] = 'Error: ' . $conn->error;
         }
-        header('Location: classroom_form.php');
-        exit();
+    } else {
+        $_SESSION['status'] = 'error';
+        $_SESSION['message'] = 'Error: The classroom already exists with the same building and room number.';
     }
+
+    header('Location: classroom_form.php');
+    exit();
+}
 
 // Check if the 'delete_classroom' form was submitted
 if (isset($_POST['delete_classroom'])) {

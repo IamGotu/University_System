@@ -11,7 +11,7 @@ btn.onclick = function() {
     addModal.style.display = "block";
 }
 
-// Close modals when 'x' is clicked
+// Close modals when 'X' is clicked
 for (let i = 0; i < spans.length; i++) {
     spans[i].onclick = function() {
         addModal.style.display = "none";

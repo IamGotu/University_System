@@ -124,41 +124,40 @@ if ($result_departments->num_rows > 0) {
             </tbody>
         </table>
 
-<!-- The Modal for Editing Course -->
-<div id="editModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <!-- Form to Edit Course -->
-        <form method="POST" action="/course/course_function.php">
-            <br>
-            <input type="hidden" id="edit-course_id" name="course_id" required>
+        <!-- The Modal for Editing Course -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <!-- Form to Edit Course -->
+                <form method="POST" action="/course/course_function.php">
+                    <br>
+                    <input type="hidden" id="edit-course_id" name="course_id" required>
 
-            <label for="edit-new_course_id">Course ID:</label>
-            <input type="text" id="edit-new_course_id" name="new_course_id" required><br><br>
+                    <label for="edit-new_course_id">Course ID:</label>
+                    <input type="text" id="edit-new_course_id" name="new_course_id" required><br><br>
 
-            <label for="edit-title">Title:</label>
-            <input type="text" id="edit-title" name="title" required><br><br>
+                    <label for="edit-title">Title:</label>
+                    <input type="text" id="edit-title" name="title" required><br><br>
 
-            <label for="edit-dept_name">Department:</label>
-            <select id="edit-dept_name" name="dept_name" required>
-                <option value="">Select Department</option>
-                <?php foreach ($departments as $dept_name): ?>
-                    <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <br><br>
+                    <label for="edit-dept_name">Department:</label>
+                    <select id="edit-dept_name" name="dept_name" required>
+                        <option value="">Select Department</option>
+                        <?php foreach ($departments as $dept_name): ?>
+                            <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <br><br>
 
-            <label for="edit-credits">Credits:</label>
-            <input type="text" id="edit-credits" name="credits" required><br><br>
+                    <label for="edit-credits">Credits:</label>
+                    <input type="text" id="edit-credits" name="credits" required><br><br>
 
-            <div class="button-container">
-                <input type="submit" name="update_course" value="Update Course">
-                <button type="button" id="cancelEditBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="update_course" value="Update Course">
+                        <button type="button" id="cancelEditBtn">Cancel</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
-
+        </div>
 
         <!-- The Modal for Deleting Course -->
         <div id="deleteModal" class="modal">
@@ -188,7 +187,7 @@ if ($result_departments->num_rows > 0) {
         editButtons[i].onclick = function() {
             var course_id = this.getAttribute("data-course_id");
             var title = this.getAttribute("data-title");
-            var dept_name = this.getAttribute("data-dept_name")
+            var dept_name = this.getAttribute("data-dept_name");
             var credits = this.getAttribute("data-credits");
 
             document.getElementById("edit-course_id").value = course_id;

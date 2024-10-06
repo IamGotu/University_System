@@ -10,8 +10,16 @@ $sql = "SELECT * FROM course";
 $result = $conn->query($sql);
 
 // Query to fetch department data (dept_name)
-$sql_courses = "SELECT DISTINCT dept_name FROM department";
-$result_courses = $conn->query($sql_courses);
+$sql_departments = "SELECT DISTINCT dept_name FROM department";
+$result_departments = $conn->query($sql_departments);
+
+// Store classroom data in an array
+$departments = [];
+if ($result_departments->num_rows > 0) {
+    while ($row = $result_departments->fetch_assoc()) {
+        $departments[] = $row['dept_name'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,18 +60,28 @@ $result_courses = $conn->query($sql_courses);
                 <!-- Form to Add Course -->
                 <form method="POST" action="/course/course_function.php">
                 <br>
-                    <label for="building">Building:</label>
-                    <input type="text" id="building" name="building" required><br><br>
+                    <label for="course_id">Course ID:</label>
+                    <input type="text" id="course_id" name="course_id" required><br><br>
 
-                    <label for="room_number">Room Number:</label>
-                    <input type="text" id="room_number" name="room_number" required><br><br>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required><br><br>
 
-                    <label for="capacity">Capacity:</label>
-                    <input type="text" id="capacity" name="capacity"><br><br>
+                    <label for="dept_name">Department:</label>
+                    <select id="dept_name" name="dept_name" required>
+                        <option value="">Select Department</option>
+                        <?php foreach ($departments as $dept_name): ?>
+                            <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <br><br>
 
-                    <input type="submit" name="add_course" value="Add Course">
+                    <label for="credits">Credits:</label>
+                    <input type="text" id="credits" name="credits"><br><br>
 
-                    <button type="button" id="cancelAddBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="add_course" value="Add Course">
+                        <button type="button" id="cancelAddBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -74,9 +92,10 @@ $result_courses = $conn->query($sql_courses);
         <table style="width:100%">
             <thead>
                 <tr>
-                    <th>Building</th>
-                    <th>Room Number</th>
-                    <th>Capacity</th>
+                    <th>Course ID</th>
+                    <th>Title</th>
+                    <th>Department</th>
+                    <th>Credits</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -84,14 +103,15 @@ $result_courses = $conn->query($sql_courses);
                 <?php if ($result->num_rows > 0) : ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <tr>
-                            <td style="text-align: center;"><?php echo $row['building']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['room_number']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['capacity']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['course_id']; ?></td>    
+                            <td style="text-align: center;"><?php echo $row['title']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['dept_name']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['credits']; ?></td>
                             <td>
                                 <!-- Edit and Delete buttons -->
                                 <div class="button-container">
-                                    <button class="edit-btn" data-building="<?php echo $row['building']; ?>" data-room_number="<?php echo $row['room_number']; ?>" data-capacity="<?php echo $row['capacity']; ?>">Edit</button>
-                                    <button class="delete-btn" data-building="<?php echo $row['building']; ?>" data-room_number="<?php echo $row['room_number']; ?>">Delete</button>
+                                    <button class="edit-btn" data-course_id="<?php echo $row['course_id']; ?>" data-title="<?php echo $row['title']; ?>" data-dept_name="<?php echo $row['dept_name']; ?>" data-credits="<?php echo $row['credits']; ?>">Edit</button>
+                                    <button class="delete-btn" data-course_id="<?php echo $row['course_id']; ?>">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -104,26 +124,41 @@ $result_courses = $conn->query($sql_courses);
             </tbody>
         </table>
 
-        <!-- The Modal for Editing Course -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <!-- Form to Edit Course -->
-                <form method="POST" action="/course/course_function.php">
-                <br>
-                    <input type="hidden" id="edit-building" name="building">
+<!-- The Modal for Editing Course -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- Form to Edit Course -->
+        <form method="POST" action="/course/course_function.php">
+            <br>
+            <input type="hidden" id="edit-course_id" name="course_id" required>
 
-                    <input type="hidden" id="edit-room_number" name="room_number">
+            <label for="edit-new_course_id">Course ID:</label>
+            <input type="text" id="edit-new_course_id" name="new_course_id" required><br><br>
 
-                    <label for="edit-capacity">Capacity:</label>
-                    <input type="text" id="edit-capacity" name="capacity" required><br><br>
+            <label for="edit-title">Title:</label>
+            <input type="text" id="edit-title" name="title" required><br><br>
 
-                    <input type="submit" name="update_course" value="Update Course">
+            <label for="edit-dept_name">Department:</label>
+            <select id="edit-dept_name" name="dept_name" required>
+                <option value="">Select Department</option>
+                <?php foreach ($departments as $dept_name): ?>
+                    <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <br><br>
 
-                    <button type="button" id="cancelEditBtn">Cancel</button>
-                </form>
+            <label for="edit-credits">Credits:</label>
+            <input type="text" id="edit-credits" name="credits" required><br><br>
+
+            <div class="button-container">
+                <input type="submit" name="update_course" value="Update Course">
+                <button type="button" id="cancelEditBtn">Cancel</button>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
+
 
         <!-- The Modal for Deleting Course -->
         <div id="deleteModal" class="modal">
@@ -132,13 +167,12 @@ $result_courses = $conn->query($sql_courses);
                 <!-- Confirmation for Deleting course -->
                 <p>Are you sure you want to delete this course?</p>
                 <form method="POST" action="/course/course_function.php">
-                    <input type="hidden" id="delete-building" name="building">
+                    <input type="hidden" id="delete-course_id" name="course_id">
 
-                    <input type="hidden" id="delete-room_number" name="room_number">
-
-                    <input type="submit" name="delete_course" value="Delete Course">
-
-                    <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    <div class="button-container">
+                        <input type="submit" name="delete_course" value="Delete Course">
+                        <button type="button" id="cancelDeleteBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -152,13 +186,16 @@ $result_courses = $conn->query($sql_courses);
     var editButtons = document.getElementsByClassName("edit-btn");
     for (let i = 0; i < editButtons.length; i++) {
         editButtons[i].onclick = function() {
-            var building = this.getAttribute("data-building");
-            var room_number = this.getAttribute("data-room_number");
-            var capacity = this.getAttribute("data-capacity");
+            var course_id = this.getAttribute("data-course_id");
+            var title = this.getAttribute("data-title");
+            var dept_name = this.getAttribute("data-dept_name")
+            var credits = this.getAttribute("data-credits");
 
-            document.getElementById("edit-building").value = building;
-            document.getElementById("edit-room_number").value = room_number;
-            document.getElementById("edit-capacity").value = capacity;
+            document.getElementById("edit-course_id").value = course_id;
+            document.getElementById("edit-new_course_id").value = course_id;
+            document.getElementById("edit-title").value = title;
+            document.getElementById("edit-dept_name").value = dept_name;
+            document.getElementById("edit-credits").value = credits;
 
             editModal.style.display = "block";
         }
@@ -168,11 +205,9 @@ $result_courses = $conn->query($sql_courses);
     var deleteButtons = document.getElementsByClassName("delete-btn");
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].onclick = function() {
-            var building = this.getAttribute("data-building");
-            var room_number = this.getAttribute("data-room_number");
+            var course_id = this.getAttribute("data-course_id");
 
-            document.getElementById("delete-building").value = building;
-            document.getElementById("delete-room_number").value = room_number;
+            document.getElementById("delete-course_id").value = course_id;
 
             deleteModal.style.display = "block";
         }

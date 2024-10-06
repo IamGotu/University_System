@@ -5,8 +5,8 @@ session_start();
 // Include the database connection
 include("../database/db_connect.php");
 
-// Query to fetch student data
-$sql = "SELECT * FROM student";
+// Query to fetch instructor data
+$sql = "SELECT * FROM instructor";
 $result = $conn->query($sql);
 
 // Query to fetch department data (dept_name)
@@ -27,14 +27,14 @@ if ($result_departments->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Instructor</title>
     <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
     <?php include('../components/sidebar.php'); ?>
 
     <div class="main-content">
-        <h1>Student</h1>
+        <h1>Instructor</h1>
         
         <?php
             // Check for status and message
@@ -50,17 +50,17 @@ if ($result_departments->num_rows > 0) {
         ?>
         <br>
 
-        <!-- Button to Open the Modal for Adding Student -->
-        <button id="openModalBtn">Add New Student</button>
+        <!-- Button to Open the Modal for Adding Instructor -->
+        <button id="openModalBtn">Add New Instructor</button>
 
-        <!-- The Modal for Adding Student -->
+        <!-- The Modal for Adding Instructor -->
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <!-- Form to Add Student -->
-                <form method="POST" action="/student/student_function.php">
+                <!-- Form to Add Instructor -->
+                <form method="POST" action="/instructor/instructor_function.php">
                 <br>
-                    <label for="ID">Student ID:</label>
+                    <label for="ID">Instructor ID:</label>
                     <input type="text" id="ID" name="ID" required><br><br>
 
                     <label for="first_name">First Name:</label>
@@ -85,7 +85,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="tot_cred" name="tot_cred"><br><br>
 
                     <div class="button-container">
-                        <input type="submit" name="add_student" value="Add Student">
+                        <input type="submit" name="add_instructor" value="Add Instructor">
                         <button type="button" id="cancelAddBtn">Cancel</button>
                     </div>
                 </form>
@@ -94,11 +94,11 @@ if ($result_departments->num_rows > 0) {
 
         <br><br>
 
-        <!-- Display students -->
+        <!-- Display instructors -->
         <table style="width:100%">
             <thead>
                 <tr>
-                    <th>Student ID</th>
+                    <th>Instructor ID</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
@@ -128,22 +128,22 @@ if ($result_departments->num_rows > 0) {
                     <?php endwhile; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="7">No students found</td>
+                        <td colspan="7">No instructors found</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
 
-        <!-- The Modal for Editing Student -->
+        <!-- The Modal for Editing Instructor -->
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <!-- Form to Edit Student -->
-                <form method="POST" action="/student/student_function.php">
+                <!-- Form to Edit Instructor -->
+                <form method="POST" action="/instructor/instructor_function.php">
                     <br>
                     <input type="hidden" id="edit-ID" name="ID" required>
 
-                    <label for="edit-new_ID">Student ID:</label>
+                    <label for="edit-new_ID">Instructor ID:</label>
                     <input type="text" id="edit-new_ID" name="new_ID" required><br><br>
 
                     <label for="edit-first_name">First Name:</label>
@@ -168,24 +168,24 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-tot_cred" name="tot_cred" required><br><br>
 
                     <div class="button-container">
-                        <input type="submit" name="update_student" value="Update Student">
+                        <input type="submit" name="update_instructor" value="Update Instructor">
                         <button type="button" id="cancelEditBtn">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- The Modal for Deleting Student -->
+        <!-- The Modal for Deleting Instructor -->
         <div id="deleteModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <!-- Confirmation for Deleting student -->
-                <p>Are you sure you want to delete this student?</p>
-                <form method="POST" action="/student/student_function.php">
+                <!-- Confirmation for Deleting instructor -->
+                <p>Are you sure you want to delete this instructor?</p>
+                <form method="POST" action="/instructor/instructor_function.php">
                     <input type="hidden" id="delete-ID" name="ID">
 
                     <div class="button-container">
-                        <input type="submit" name="delete_student" value="Delete Student">
+                        <input type="submit" name="delete_instructor" value="Delete Instructor">
                         <button type="button" id="cancelDeleteBtn">Cancel</button>
                     </div>
                 </form>

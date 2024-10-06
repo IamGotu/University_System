@@ -34,18 +34,25 @@ if (isset($_POST['update_time_slot'])) {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Log the received values for debugging
-    error_log("time_slot_id: $time_slot_id, new_time_slot_id: $new_time_slot_id, day: $day, start_time: $start_time, end_time: $end_time");
+    // Ensure that you're not updating to a duplicate department
+    $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$new_time_slot_id' AND day='$day' AND start_time='$start_time' AND end_time='$end_time' AND NOT time_slot_id='$time_slot_id'";
+    $check_result = $conn->query($check_sql);
 
-    // Update the time_slot data in the database
-    $sql = "UPDATE time_slot SET time_slot_id='$new_time_slot_id', day='$day', start_time='$start_time', end_time='$end_time' WHERE time_slot_id='$time_slot_id'";
-    
-    if ($conn->query($sql) === TRUE) {
-        $_SESSION['status'] = 'success';
-        $_SESSION['message'] = 'Time Slot updated successfully';
+    // Only proceed if the new building and room_number do not exist
+    if ($check_result->num_rows === 0) {
+        // Update the time_slot data in the database
+        $sql = "UPDATE time_slot SET time_slot_id='$new_time_slot_id', day='$day', start_time='$start_time', end_time='$end_time' WHERE time_slot_id='$time_slot_id'";
+        
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['status'] = 'success';
+            $_SESSION['message'] = 'Time Slot updated successfully';
+        } else {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'Error: ' . $conn->error; // Capture specific error message
+        }
     } else {
         $_SESSION['status'] = 'error';
-        $_SESSION['message'] = 'Error: ' . $conn->error; // Capture specific error message
+        $_SESSION['message'] = 'Tims slot already exists';
     }
 
     header('Location: time_slot_form.php');

@@ -46,7 +46,7 @@ $result = $conn->query($sql);
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <!-- Form to Add Time Slot -->
-                <form method="POST" action="/time-slot/time_slot_function.php">
+                <form method="POST" action="/time_slot/time_slot_function.php">
                 <br>
                 <label for="time_slot_id">Time Slot ID:</label>
                     <select id="time_slot_id" name="time_slot_id" required>
@@ -78,6 +78,7 @@ $result = $conn->query($sql);
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
+                        <option value="9">9</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
@@ -102,6 +103,7 @@ $result = $conn->query($sql);
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
+                        <option value="9">9</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
@@ -161,7 +163,7 @@ $result = $conn->query($sql);
                     <?php endwhile; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="4">No time slots found</td>
+                        <td colspan="5">No time slots found</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -172,7 +174,7 @@ $result = $conn->query($sql);
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <!-- Form to Edit Time Slot -->
-                <form method="POST" action="/time-slot/time_slot_function.php">
+                <form method="POST" action="/time_slot/time_slot_function.php">
                 <br>
                     <input type="hidden" id="edit-time_slot_id" name="time_slot_id">
 
@@ -206,6 +208,7 @@ $result = $conn->query($sql);
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
+                        <option value="9">9</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
@@ -227,6 +230,7 @@ $result = $conn->query($sql);
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
+                        <option value="9">9</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
@@ -257,7 +261,7 @@ $result = $conn->query($sql);
                 <span class="close">&times;</span>
                 <!-- Confirmation for Deleting time_slot -->
                 <p>Are you sure you want to delete this time slot?</p>
-                <form method="POST" action="/time-slot/time_slot_function.php">
+                <form method="POST" action="/time_slot/time_slot_function.php">
                     <input type="hidden" id="delete-time_slot_id" name="time_slot_id">
 
                     <div class="button-container">

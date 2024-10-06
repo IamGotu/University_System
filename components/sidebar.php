@@ -2,7 +2,7 @@
 <div class="sidebar">
     <h2>University System</h2>
     <ul>
-        <li><a href="../time-slot/time_slot_form.php">Time Slots</a></li>
+        <li><a href="../time_slot/time_slot_form.php">Time Slots</a></li>
         <li><a href="../classroom/classroom_form.php">Classrooms</a></li>
         <li><a href="../department/department_form.php">Departments</a></li>
         <li><a href="../course/course_form.php">Courses</a></li>

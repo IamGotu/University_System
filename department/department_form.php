@@ -126,8 +126,10 @@ if ($result_classrooms->num_rows > 0) {
                 <!-- Form to Edit Department -->
                 <form method="POST" action="/department/department_function.php">
                 <br>
-                    <label for="edit-dept_name">Department:</label>
-                    <input type="text" id="edit-dept_name" name="dept_name" required><br><br>
+                    <input type="hidden" id="edit-dept_name" name="dept_name" required>
+
+                    <label for="edit-new_dept_name">Department:</label>
+                    <input type="text" id="edit-new_dept_name" name="new_dept_name" required><br><br>
 
                     <label for="edit-building">Building:</label>
                     <select id="edit-building" name="building" required>
@@ -139,7 +141,7 @@ if ($result_classrooms->num_rows > 0) {
                     <br><br>
 
                     <label for="edit-budget">Budget:</label>
-                    <input type="text" id="edit-budget" name="budget" required><br><br>
+                    <input type="number" id="edit-budget" name="budget" required><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="update_department" value="Update Department">
@@ -179,8 +181,9 @@ if ($result_classrooms->num_rows > 0) {
             var building = this.getAttribute("data-building");
             var budget = this.getAttribute("data-budget");
 
-            document.getElementById("edit-building").value = building;
             document.getElementById("edit-dept_name").value = dept_name;
+            document.getElementById("edit-new_dept_name").value = dept_name;
+            document.getElementById("edit-building").value = building;
             document.getElementById("edit-budget").value = budget;
 
             editModal.style.display = "block";

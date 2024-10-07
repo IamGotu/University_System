@@ -61,14 +61,34 @@ if (isset($_POST['update_instructor'])) {
     $dept_name = $_POST['dept_name'];
     $salary = $_POST['salary'];
 
+    // Check if the new_ID already exists in another row
+    if ($ID !== $new_ID) {
+        $check_id_sql = "SELECT * FROM instructor WHERE ID = '$new_ID'";
+        $check_id_result = $conn->query($check_id_sql);
+        
+        if ($check_id_result->num_rows > 0) {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'The new Time Slot ID already exists. Please use a different ID.';
+            header('Location: instructor_form.php');
+            exit();
+        }
+    }
     // Check if the new ID already exists
-    $check_sql = "SELECT * FROM instructor WHERE ID='$new_ID' AND ID != '$ID'";
+    $check_sql = "SELECT * FROM instructor WHERE ID = '$new_ID' AND ID != '$ID'";
     $check_result = $conn->query($check_sql);
 
     // Only proceed if the new ID does not exist
-    if ($check_result->num_rows === 0) {
+    if ($check_result->num_rows > 0) {
+            $_SESSION['status'] = 'error';
+            $_SESSION['message'] = 'Instructor ID already exists';
+        } else {
         // Update the instructor data in the database
-        $sql = "UPDATE instructor SET ID='$new_ID', first_name='$first_name', middle_name='$middle_name', last_name='$last_name', street_number='$street_number', street_name='$street_name', apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name='$dept_name', salary='$salary' WHERE ID='$ID'";
+        $sql = "UPDATE instructor
+                SET ID='$new_ID', first_name='$first_name',
+                middle_name='$middle_name', last_name='$last_name',
+                street_number='$street_number', street_name='$street_name', apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name='$dept_name',
+                salary='$salary' WHERE ID='$ID'";
+
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Instructor updated successfully';
@@ -76,11 +96,7 @@ if (isset($_POST['update_instructor'])) {
             $_SESSION['status'] = 'error';
             $_SESSION['message'] = 'Error: ' . $conn->error;
         }
-    } else {
-        $_SESSION['status'] = 'error';
-        $_SESSION['message'] = 'Instructor ID already exists';
-    }
-
+    } 
     header('Location: instructor_form.php');
     exit();
 }

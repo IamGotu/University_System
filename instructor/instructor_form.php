@@ -103,7 +103,7 @@ if ($result_departments->num_rows > 0) {
                     <br><br>
 
                     <label for="salary">Salary:</label>
-                    <input type="text" id="salary" name="salary"><br><br>
+                    <input type="number" id="salary" name="salary"><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="add_instructor" value="Add Instructor">
@@ -191,25 +191,25 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-last_name" name="last_name" required><br><br>
 
                     <label for="edit-street_number">Street Number:</label>
-                    <input type="number" id="edit-street_number" name="edit-street_number" required><br><br>
+                    <input type="number" id="edit-street_number" name="street_number" required><br><br>
 
                     <label for="edit-street_name">Street Name:</label>
-                    <input type="text" id="edit-street_name" name="edit-street_name" required><br><br>
+                    <input type="text" id="edit-street_name" name="street_name" required><br><br>
 
                     <label for="edit-apt_number">Apartment Number:</label>
-                    <input type="number" id="edit-apt_number" name="edit-apt_number" required><br><br>
+                    <input type="number" id="edit-apt_number" name="apt_number" required><br><br>
 
                     <label for="edit-city">City:</label>
-                    <input type="text" id="edit-city" name="edit-city" required><br><br>
+                    <input type="text" id="edit-city" name="city" required><br><br>
 
                     <label for="edit-state">State:</label>
-                    <input type="text" id="edit-state" name="edit-state" required><br><br>
+                    <input type="text" id="edit-state" name="state" required><br><br>
 
                     <label for="edit-postal_code">Postal Code:</label>
-                    <input type="number" id="edit-postal_code" name="edit-postal_code" required><br><br>
+                    <input type="number" id="edit-postal_code" name="postal_code" required><br><br>
 
                     <label for="edit-date_of_birth">Date of Birth:</label>
-                    <input type="date" id="edit-date_of_birth" name="edit-date_of_birth" required><br><br>
+                    <input type="date" id="edit-date_of_birth" name="date_of_birth" required><br><br>
 
                     <label for="edit-dept_name">Department:</label>
                     <select id="edit-dept_name" name="dept_name" required>
@@ -281,7 +281,7 @@ if ($result_departments->num_rows > 0) {
             document.getElementById("edit-apt_number").value = apt_number;
             document.getElementById("edit-city").value = city;
             document.getElementById("edit-state").value = state;
-            document.getElementById("edit-postal-code").value = postal-code;
+            document.getElementById("edit-postal_code").value = postal_code;
             document.getElementById("edit-date_of_birth").value = date_of_birth;
             document.getElementById("edit-dept_name").value = dept_name;
             document.getElementById("edit-salary").value = salary;

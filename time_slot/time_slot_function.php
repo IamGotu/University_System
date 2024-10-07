@@ -12,11 +12,11 @@ if (isset($_POST['add_time_slot'])) {
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
 
-    // Check if the combination of time_slot_id, day, start_time, and end_time already exists
+    // Check if the time_slot_id already exists
     $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$time_slot_id' AND day='$day' AND start_time='$start_time' AND end_time='$end_time'";
     $check_result = $conn->query($check_sql);
 
-    // Only proceed to insert if the combination does not already exist
+    // Only proceed to insert if the time_slot_id does not already exist
     if ($check_result->num_rows > 0) {
         $_SESSION['status'] = 'error';
         $_SESSION['message'] = 'Time slot ID already exists';
@@ -62,7 +62,7 @@ if (isset($_POST['update_time_slot'])) {
     $check_result = $conn->query($check_sql);
 
     if ($check_result->num_rows > 0) {
-        // Prevent updating if the combination already exists
+        // Prevent updating if the time_slot_ID already exists
         $_SESSION['status'] = 'error';
         $_SESSION['message'] = 'Time slot already exists.';
     } else {

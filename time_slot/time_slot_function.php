@@ -56,7 +56,7 @@ if (isset($_POST['update_time_slot'])) {
         }
     }
 
-    // Check if the combination of day, start_time, and end_time already exists in another row
+    // Check if the time_slot_ID already exists in another row
     $check_sql = "SELECT * FROM time_slot 
                   WHERE time_slot_id = '$new_time_slot_id' AND time_slot_id != '$time_slot_id'";
     $check_result = $conn->query($check_sql);

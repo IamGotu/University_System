@@ -118,7 +118,7 @@ if ($result_departments->num_rows > 0) {
                     <?php endwhile; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="4">No Courses found</td>
+                        <td colspan="5">No Courses found</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

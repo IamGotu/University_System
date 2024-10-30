@@ -141,6 +141,15 @@ input[type="date"], input[type="submit"], button {
     margin: 0; /* Remove default margin */
 }
 
+input[type="time"], input[type="submit"], button {
+    padding: 8px; /* Reduced padding for inputs and buttons */
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0; /* Remove default margin */
+}
+
 input[type="submit"], button {
     margin-top: 5px; /* Add some space above the buttons */
 }

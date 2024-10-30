@@ -34,7 +34,7 @@ if ($result_departments->num_rows > 0) {
     <?php include('../components/sidebar.php'); ?>
 
     <div class="main-content">
-        <h1>Student</h1>
+        <h1>Students</h1>
         
         <?php
             // Check for status and message

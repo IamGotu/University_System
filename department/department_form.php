@@ -63,7 +63,7 @@ if ($result_classrooms->num_rows > 0) {
                     <label for="dept_name">Department:</label>
                     <input type="text" id="dept_name" name="dept_name" required><br><br>
 
-                    <label for="building">Building:</label>
+                    <label for="building">Building Name:</label>
                     <select id="building" name="building" required>
                         <option value="">Select Building</option>
                         <?php foreach ($classrooms as $building): ?>
@@ -90,7 +90,7 @@ if ($result_classrooms->num_rows > 0) {
             <thead>
                 <tr>
                     <th>Department</th>
-                    <th>Building</th>
+                    <th>Building Name</th>
                     <th>Budget</th>
                     <th>Actions</th>
                 </tr>
@@ -131,7 +131,7 @@ if ($result_classrooms->num_rows > 0) {
                     <label for="edit-new_dept_name">Department:</label>
                     <input type="text" id="edit-new_dept_name" name="new_dept_name" required><br><br>
 
-                    <label for="edit-building">Building:</label>
+                    <label for="edit-building">Building Name:</label>
                     <select id="edit-building" name="building" required>
                         <option value="">Select Building</option>
                         <?php foreach ($classrooms as $building): ?>

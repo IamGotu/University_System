@@ -27,14 +27,14 @@ if ($result_classrooms->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Department</title>
+    <title>Departments</title>
     <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
     <?php include('../components/sidebar.php'); ?>
 
     <div class="main-content">
-        <h1>Department</h1>
+        <h1>Departments</h1>
         
         <?php
             // Check for status and message

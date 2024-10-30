@@ -13,7 +13,7 @@ if (isset($_POST['add_time_slot'])) {
     $end_time = $_POST['end_time'];
 
     // Check if the time_slot_id already exists
-    $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$time_slot_id' AND day='$day' AND start_time='$start_time' AND end_time='$end_time'";
+    $check_sql = "SELECT * FROM time_slot WHERE time_slot_id='$time_slot_id'";
     $check_result = $conn->query($check_sql);
 
     // Only proceed to insert if the time_slot_id does not already exist

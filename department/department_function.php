@@ -8,7 +8,7 @@ include("../database/db_connect.php");
 // Check if the 'add_department' form was submitted
 if (isset($_POST['add_department'])) {
     $dept_name = $_POST['dept_name'];
-    $building = $_POST['building'];
+    $building = !empty($_POST['building']) ? "'" . $_POST['building'] . "'" : "NULL";
     $budget = $_POST['budget'];
 
     // Check if the department already exists
@@ -21,7 +21,7 @@ if (isset($_POST['add_department'])) {
         $_SESSION['message'] = 'Department already exists';
     } else {
         // Insert the new department into the database
-        $sql = "INSERT INTO department (dept_name, building, budget) VALUES ('$dept_name', '$building', '$budget')";
+        $sql = "INSERT INTO department (dept_name, building, budget) VALUES ('$dept_name', $building, '$budget')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Department added successfully';
@@ -38,7 +38,7 @@ if (isset($_POST['add_department'])) {
 if (isset($_POST['update_department'])) {
     $dept_name = $_POST['dept_name'];
     $new_dept_name = $_POST['new_dept_name'];
-    $building = $_POST['building'];
+    $building = !empty($_POST['building']) ? "'" . $_POST['building'] . "'" : "NULL";
     $budget = $_POST['budget'];
 
     // Ensure that you're not updating to a duplicate department
@@ -48,7 +48,7 @@ if (isset($_POST['update_department'])) {
     // Only proceed if the new building and room_number do not exist
     if ($check_result->num_rows === 0) {
         // Update the department data in the database
-        $sql = "UPDATE department SET dept_name='$new_dept_name', building='$building', budget='$budget' WHERE dept_name='$dept_name'";
+        $sql = "UPDATE department SET dept_name='$new_dept_name', building=$building, budget='$budget' WHERE dept_name='$dept_name'";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Department updated successfully';

@@ -11,7 +11,7 @@ if (isset($_POST['add_student'])) {
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
-    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $tot_cred = $_POST['tot_cred'];
 
     // Check if the student already exists
@@ -44,7 +44,7 @@ if (isset($_POST['update_student'])) {
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
-    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $tot_cred = $_POST['tot_cred'];
 
     // Check if the new ID already exists

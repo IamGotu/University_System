@@ -151,7 +151,9 @@ if ($result_departments->num_rows > 0) {
                             <td style="text-align: center;"><?php echo $row['postal_code']; ?></td>
                             <td style="text-align: center;"><?php echo $row['date_of_birth']; ?></td>
                             <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
-                            <td style="text-align: center;"><?php echo $row['salary']; ?></td>
+                            <td style="text-align: center;">
+                                <?php echo '₱' . number_format($row['salary'], 2); ?>
+                            </td>
                             <td>
                                 <!-- Edit and Delete buttons -->
                                 <div class="button-container">

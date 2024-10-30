@@ -18,7 +18,7 @@ if (isset($_POST['add_instructor'])) {
     $state = $_POST['state'];
     $postal_code = $_POST['postal_code'];
     $date_of_birth = $_POST['date_of_birth'];
-    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $salary = $_POST['salary'];
 
     // Check if the instructor already exists
@@ -58,7 +58,7 @@ if (isset($_POST['update_instructor'])) {
     $state = $_POST['state'];
     $postal_code = $_POST['postal_code'];
     $date_of_birth = $_POST['date_of_birth'];
-    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $salary = $_POST['salary'];
 
     // Check if the new_ID already exists in another row

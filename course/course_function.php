@@ -9,7 +9,7 @@ include("../database/db_connect.php");
 if (isset($_POST['add_course'])) {
     $course_id = $_POST['course_id'];
     $title = $_POST['title'];
-    $dept_name = $_POST['dept_name'];
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $credits = $_POST['credits'];
 
     // Check if the course already exists
@@ -22,7 +22,7 @@ if (isset($_POST['add_course'])) {
         $_SESSION['message'] = 'Course already exists';
     } else {
         // Insert the new course into the database
-        $sql = "INSERT INTO course (course_id, title, dept_name, credits) VALUES ('$course_id', '$title', '$dept_name', '$credits')";
+        $sql = "INSERT INTO course (course_id, title, dept_name, credits) VALUES ('$course_id', '$title', $dept_name, '$credits')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Course added successfully';
@@ -40,7 +40,7 @@ if (isset($_POST['update_course'])) {
     $course_id = $_POST['course_id']; // Current course_id
     $new_course_id = $_POST['new_course_id']; // New course_id
     $title = $_POST['title'];
-    $dept_name = $_POST['dept_name'];
+    $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $credits = $_POST['credits'];
 
     // Check if the new course_id already exists
@@ -50,7 +50,7 @@ if (isset($_POST['update_course'])) {
     // Only proceed if the new course_id does not exist
     if ($check_result->num_rows === 0) {
         // Update the course data in the database
-        $sql = "UPDATE course SET course_id='$new_course_id', title='$title', dept_name='$dept_name', credits='$credits' WHERE course_id='$course_id'";
+        $sql = "UPDATE course SET course_id='$new_course_id', title='$title', dept_name=$dept_name, credits='$credits' WHERE course_id='$course_id'";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Course updated successfully';

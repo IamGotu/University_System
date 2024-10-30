@@ -48,17 +48,8 @@ $result = $conn->query($sql);
                 <!-- Form to Add Time Slot -->
                 <form method="POST" action="/time_slot/time_slot_function.php">
                 <br>
-                <label for="time_slot_id">Time Slot ID:</label>
-                    <select id="time_slot_id" name="time_slot_id" required>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                    </select>
+                    <label for="time_slot_id">Time Slot ID:</label>
+                    <input type="text" id="time_slot_id" name="time_slot_id" required>
                     <br><br>
 
                     <label for="day">Day:</label>
@@ -74,53 +65,11 @@ $result = $conn->query($sql);
                     <br><br>
 
                     <label for="start_time">Start Time:</label>
-                    <select id="start_time" name="start_time" required>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                    </select>
+                    <input type="time" id="start_time" name="start_time" required>
                     <br><br>
 
                     <label for="end_time">End Time:</label>
-                    <select id="end_time" name="end_time" required>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                    </select>
+                    <input type="time" id="end_time" name="end_time" required>
                     <br><br>
 
                     <div class="button-container">
@@ -137,7 +86,7 @@ $result = $conn->query($sql);
         <table style="width:100%">
             <thead>
                 <tr>
-                <th>Time Slot ID</th>
+                    <th>Time Slot ID</th>
                     <th>Day</th>
                     <th>Start Time</th>
                     <th>End Time</th>
@@ -179,16 +128,7 @@ $result = $conn->query($sql);
                     <input type="hidden" id="edit-time_slot_id" name="time_slot_id">
 
                     <label for="edit-new_time_slot_id">Time Slot ID:</label>
-                    <select id="edit-new_time_slot_id" name="new_time_slot_id" required>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                    </select>
+                    <input type="text" id="edit-new_time_slot_id" name="new_time_slot_id" required>
                     <br><br>
 
                     <label for="edit-day">Day:</label>
@@ -204,47 +144,11 @@ $result = $conn->query($sql);
                     <br><br>
 
                     <label for="edit-start_time">Start Time:</label>
-                    <select id="edit-start_time" name="start_time" required>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                    </select>
+                    <input type="time" id="edit-start_time" name="start_time" required>
                     <br><br>
 
                     <label for="edit-end_time">End Time:</label>
-                    <select id="edit-end_time" name="end_time" required>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                    </select>
+                    <input type="time" id="edit-end_time" name="end_time" required>
                     <br><br>
 
                     <div class="button-container">

@@ -27,14 +27,14 @@ if ($result_departments->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course</title>
+    <title>Courses</title>
     <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
     <?php include('../components/sidebar.php'); ?>
 
     <div class="main-content">
-        <h1>Course</h1>
+        <h1>Courses</h1>
         
         <?php
             // Check for status and message
@@ -67,7 +67,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="title" name="title" required><br><br>
 
                     <label for="dept_name">Department:</label>
-                    <select id="dept_name" name="dept_name" required>
+                    <select id="dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -105,7 +105,7 @@ if ($result_departments->num_rows > 0) {
                         <tr>
                             <td style="text-align: center;"><?php echo $row['course_id']; ?></td>    
                             <td style="text-align: center;"><?php echo $row['title']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['dept_name']; ?></td>
+                            <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['credits']; ?></td>
                             <td>
                                 <!-- Edit and Delete buttons -->
@@ -140,7 +140,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-title" name="title" required><br><br>
 
                     <label for="edit-dept_name">Department:</label>
-                    <select id="edit-dept_name" name="dept_name" required>
+                    <select id="edit-dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -149,7 +149,7 @@ if ($result_departments->num_rows > 0) {
                     <br><br>
 
                     <label for="edit-credits">Credits:</label>
-                    <input type="text" id="edit-credits" name="credits" required><br><br>
+                    <input type="text" id="edit-credits" name="credits"><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="update_course" value="Update Course">

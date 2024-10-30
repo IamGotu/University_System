@@ -64,7 +64,7 @@ if ($result_classrooms->num_rows > 0) {
                     <input type="text" id="dept_name" name="dept_name" required><br><br>
 
                     <label for="building">Building Name:</label>
-                    <select id="building" name="building" required>
+                    <select id="building" name="building">
                         <option value="">Select Building</option>
                         <?php foreach ($classrooms as $building): ?>
                             <option value="<?php echo $building; ?>"><?php echo $building; ?></option>
@@ -73,7 +73,7 @@ if ($result_classrooms->num_rows > 0) {
                     <br><br>
 
                     <label for="budget">Budget:</label>
-                    <input type="text" id="budget" name="budget" required><br><br>
+                    <input type="text" id="budget" name="budget"><br><br>
                     
                     <div class="button-container">
                         <input type="submit" name="add_department" value="Add Department">
@@ -100,8 +100,10 @@ if ($result_classrooms->num_rows > 0) {
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <tr>
                             <td style="text-align: center;"><?php echo $row['dept_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['building']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['budget']; ?></td>
+                            <td style="text-align: center;"><?php echo !empty($row['building']) ? $row['building'] : 'N/A'; ?></td>
+                            <td style="text-align: center;">
+                                <?php echo '₱' . number_format($row['budget'], 2); ?>
+                            </td>
                             <td>
                                 <!-- Edit and Delete buttons -->
                                 <div class="button-container">
@@ -132,7 +134,7 @@ if ($result_classrooms->num_rows > 0) {
                     <input type="text" id="edit-new_dept_name" name="new_dept_name" required><br><br>
 
                     <label for="edit-building">Building Name:</label>
-                    <select id="edit-building" name="building" required>
+                    <select id="edit-building" name="building">
                         <option value="">Select Building</option>
                         <?php foreach ($classrooms as $building): ?>
                             <option value="<?php echo htmlspecialchars($building); ?>"><?php echo $building; ?></option>
@@ -141,7 +143,7 @@ if ($result_classrooms->num_rows > 0) {
                     <br><br>
 
                     <label for="edit-budget">Budget:</label>
-                    <input type="number" id="edit-budget" name="budget" required><br><br>
+                    <input type="number" id="edit-budget" name="budget"><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="update_department" value="Update Department">

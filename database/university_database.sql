@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2024 at 08:55 AM
+-- Generation Time: Oct 30, 2024 at 09:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,8 +55,8 @@ CREATE TABLE `classroom` (
 CREATE TABLE `course` (
   `course_id` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `dept_name` varchar(100) NOT NULL,
-  `credits` int(100) NOT NULL
+  `dept_name` varchar(100) DEFAULT 'N/A',
+  `credits` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -67,8 +67,8 @@ CREATE TABLE `course` (
 
 CREATE TABLE `department` (
   `dept_name` varchar(100) NOT NULL,
-  `building` varchar(100) NOT NULL,
-  `budget` int(100) NOT NULL
+  `building` varchar(100) DEFAULT 'N/A',
+  `budget` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -89,8 +89,8 @@ CREATE TABLE `instructor` (
   `state` varchar(100) NOT NULL,
   `postal_code` int(100) NOT NULL,
   `date_of_birth` date NOT NULL,
-  `dept_name` varchar(100) NOT NULL,
-  `salary` int(100) NOT NULL
+  `dept_name` varchar(100) DEFAULT 'N/A',
+  `salary` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -131,8 +131,8 @@ CREATE TABLE `student` (
   `first_name` varchar(100) NOT NULL,
   `middle_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `dept_name` varchar(100) NOT NULL,
-  `tot_cred` int(100) NOT NULL
+  `dept_name` varchar(100) DEFAULT 'N/A',
+  `tot_cred` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -173,8 +173,8 @@ CREATE TABLE `teaches` (
 CREATE TABLE `time_slot` (
   `time_slot_id` varchar(100) NOT NULL,
   `day` varchar(100) NOT NULL,
-  `start_time` int(100) NOT NULL,
-  `end_time` int(100) NOT NULL
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

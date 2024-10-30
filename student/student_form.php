@@ -73,7 +73,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="last_name" name="last_name" required><br><br>
 
                     <label for="dept_name">Department:</label>
-                    <select id="dept_name" name="dept_name" required>
+                    <select id="dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -115,7 +115,7 @@ if ($result_departments->num_rows > 0) {
                             <td style="text-align: center;"><?php echo $row['first_name']; ?></td>
                             <td style="text-align: center;"><?php echo $row['middle_name']; ?></td>
                             <td style="text-align: center;"><?php echo $row['last_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['dept_name']; ?></td>
+                            <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['tot_cred']; ?></td>
                             <td>
                                 <!-- Edit and Delete buttons -->
@@ -156,7 +156,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-last_name" name="last_name" required><br><br>
 
                     <label for="edit-dept_name">Department:</label>
-                    <select id="edit-dept_name" name="dept_name" required>
+                    <select id="edit-dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -165,7 +165,7 @@ if ($result_departments->num_rows > 0) {
                     <br><br>
 
                     <label for="edit-tot_cred">Total Credits:</label>
-                    <input type="text" id="edit-tot_cred" name="tot_cred" required><br><br>
+                    <input type="text" id="edit-tot_cred" name="tot_cred"><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="update_student" value="Update Student">

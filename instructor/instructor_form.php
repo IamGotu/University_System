@@ -27,14 +27,14 @@ if ($result_departments->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructor</title>
+    <title>Instructors</title>
     <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
     <?php include('../components/sidebar.php'); ?>
 
     <div class="main-content">
-        <h1>Instructor</h1>
+        <h1>Instructors</h1>
         
         <?php
             // Check for status and message
@@ -94,7 +94,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="date" id="date_of_birth" name="date_of_birth" required><br><br>
 
                     <label for="dept_name">Department:</label>
-                    <select id="dept_name" name="dept_name" required>
+                    <select id="dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -150,7 +150,7 @@ if ($result_departments->num_rows > 0) {
                             <td style="text-align: center;"><?php echo $row['state']; ?></td>
                             <td style="text-align: center;"><?php echo $row['postal_code']; ?></td>
                             <td style="text-align: center;"><?php echo $row['date_of_birth']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['dept_name']; ?></td>
+                            <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['salary']; ?></td>
                             <td>
                                 <!-- Edit and Delete buttons -->
@@ -212,7 +212,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="date" id="edit-date_of_birth" name="date_of_birth" required><br><br>
 
                     <label for="edit-dept_name">Department:</label>
-                    <select id="edit-dept_name" name="dept_name" required>
+                    <select id="edit-dept_name" name="dept_name">
                         <option value="">Select Department</option>
                         <?php foreach ($departments as $dept_name): ?>
                             <option value="<?php echo htmlspecialchars($dept_name); ?>"><?php echo $dept_name; ?></option>
@@ -221,7 +221,7 @@ if ($result_departments->num_rows > 0) {
                     <br><br>
 
                     <label for="edit-salary">Salary:</label>
-                    <input type="text" id="edit-salary" name="salary" required><br><br>
+                    <input type="text" id="edit-salary" name="salary"><br><br>
 
                     <div class="button-container">
                         <input type="submit" name="update_instructor" value="Update Instructor">

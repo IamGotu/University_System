@@ -18,7 +18,7 @@ if (isset($_POST['add_instructor'])) {
     $state = $_POST['state'];
     $postal_code = $_POST['postal_code'];
     $date_of_birth = $_POST['date_of_birth'];
-    $dept_name = $_POST['dept_name'];
+    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
     $salary = $_POST['salary'];
 
     // Check if the instructor already exists
@@ -31,7 +31,7 @@ if (isset($_POST['add_instructor'])) {
         $_SESSION['message'] = 'Instructor already exists';
     } else {
         // Insert the new instructor into the database
-        $sql = "INSERT INTO instructor (ID, first_name, middle_name, last_name, street_number, street_name, apt_number, city, state, postal_code, date_of_birth, dept_name, salary) VALUES ('$ID', '$first_name', '$middle_name', '$last_name', '$street_number', '$street_name', '$apt_number', '$city', '$state', '$postal_code', '$date_of_birth', '$dept_name', '$salary')";
+        $sql = "INSERT INTO instructor (ID, first_name, middle_name, last_name, street_number, street_name, apt_number, city, state, postal_code, date_of_birth, dept_name, salary) VALUES ('$ID', '$first_name', '$middle_name', '$last_name', '$street_number', '$street_name', '$apt_number', '$city', '$state', '$postal_code', '$date_of_birth', $dept_name, '$salary')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Instructor added successfully';
@@ -58,7 +58,7 @@ if (isset($_POST['update_instructor'])) {
     $state = $_POST['state'];
     $postal_code = $_POST['postal_code'];
     $date_of_birth = $_POST['date_of_birth'];
-    $dept_name = $_POST['dept_name'];
+    $dept_name = !empty($_POST['dept_name']) ? "'$dept_name'" : "NULL";
     $salary = $_POST['salary'];
 
     // Check if the new_ID already exists in another row
@@ -86,7 +86,7 @@ if (isset($_POST['update_instructor'])) {
         $sql = "UPDATE instructor
                 SET ID='$new_ID', first_name='$first_name',
                 middle_name='$middle_name', last_name='$last_name',
-                street_number='$street_number', street_name='$street_name', apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name='$dept_name',
+                street_number='$street_number', street_name='$street_name', apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name=$dept_name,
                 salary='$salary' WHERE ID='$ID'";
 
         if ($conn->query($sql) === TRUE) {

@@ -8,7 +8,7 @@ include("../database/db_connect.php");
 // Check if the 'add_classroom' form was submitted
 if (isset($_POST['add_classroom'])) {
     $building = $_POST['building'];
-    $room_number = $_POST['room_number'];
+    $room_number = $_POST['room_number'] ? "'" . $_POST['room_number'] . "'" : "NULL";
     $capacity = $_POST['capacity'];
 
     // Check if the classroom already exists
@@ -38,9 +38,8 @@ if (isset($_POST['add_classroom'])) {
 if (isset($_POST['update_classroom'])) {
     $building = $_POST['building'];
     $new_building = $_POST['new_building']; // New building
-    $room_number = $_POST['room_number'];
-    $new_room_number = $_POST['new_room_number']; // New room_number
-    $capacity = $_POST['capacity'];
+    $room_number = $_POST['room_number'] ? "'" . $_POST['room_number'] . "'" : "NULL";
+    $new_room_number = $_POST['new_room_number'] ? "'" . $_POST['new_room_number'] . "'" : "NULL";
 
     // Check if the new building and room_number already exist
     $check_sql = "SELECT * FROM classroom WHERE (building='$new_building' AND room_number='$new_room_number') 

@@ -52,7 +52,7 @@ $result = $conn->query($sql);
                     <input type="text" id="building" name="building" required><br><br>
 
                     <label for="room_number">Room Number:</label>
-                    <input type="number" id="room_number" name="room_number" required><br><br>
+                    <input type="number" id="room_number" name="room_number"><br><br>
 
                     <label for="capacity">Capacity:</label>
                     <input type="text" id="capacity" name="capacity"><br><br>
@@ -82,7 +82,7 @@ $result = $conn->query($sql);
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <tr>
                             <td style="text-align: center;"><?php echo $row['building']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['room_number']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['room_number'] ? $row['room_number'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['capacity']; ?></td>
                             <td>
                                 <!-- Edit and Delete buttons -->
@@ -110,13 +110,13 @@ $result = $conn->query($sql);
                 <br>
                     <input type="hidden" id="edit-building" name="building">
                     
-                    <input type="hidden" id="edit-room_number" name="room_number" required>
+                    <input type="hidden" id="edit-room_number" name="room_number">
 
                     <label for="edit-new_building">Building:</label>
                     <input type="text" id="edit-new_building" name="new_building" required><br><br>
 
                     <label for="edit-new_room_number">Room Number:</label>
-                    <input type="number" id="edit-new_room_number" name="new_room_number" required><br><br>
+                    <input type="number" id="edit-new_room_number" name="new_room_number"><br><br>
 
                     <label for="edit-capacity">Capacity:</label>
                     <input type="text" id="edit-capacity" name="capacity" required><br><br>

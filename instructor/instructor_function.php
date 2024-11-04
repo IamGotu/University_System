@@ -31,7 +31,7 @@ if (isset($_POST['add_instructor'])) {
         $_SESSION['message'] = 'Instructor already exists';
     } else {
         // Insert the new instructor into the database
-        $sql = "INSERT INTO instructor (ID, first_name, middle_name, last_name, street_number, street_name, apt_number, city, state, postal_code, date_of_birth, dept_name, salary) VALUES ('$ID', '$first_name', '$middle_name', '$last_name', '$street_number', '$street_name', '$apt_number', '$city', '$state', '$postal_code', '$date_of_birth', $dept_name, '$salary')";
+        $sql = "INSERT INTO instructor (ID, first_name, middle_name, last_name, street_number, street_name, apt_number, city, state, postal_code, date_of_birth, dept_name, salary) VALUES ('$ID', '$first_name', $middle_name, '$last_name', '$street_number', $street_name, '$apt_number', '$city', '$state', '$postal_code', '$date_of_birth', $dept_name, '$salary')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Instructor added successfully';
@@ -49,14 +49,14 @@ if (isset($_POST['update_instructor'])) {
     $ID = $_POST['ID']; // Current ID
     $new_ID = $_POST['new_ID']; // New ID
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
+    $middle_name = $_POST['middle_name'] ? "'" . $_POST['middle_name'] . "'" : "NULL";
     $last_name = $_POST['last_name'];
-    $street_number = $_POST['street_number'];
-    $street_name = $_POST['street_name'];
-    $apt_number = $_POST['apt_number'];
+    $street_number = $_POST['street_number'] ? "'" . $_POST['street_number'] . "'" : "NULL";
+    $street_name = $_POST['street_name'] ? "'" . $_POST['street_name'] . "'" : "NULL";
+    $apt_number = $_POST['apt_number'] ? "'" . $_POST['apt_number'] . "'" : "NULL";
     $city = $_POST['city'];
     $state = $_POST['state'];
-    $postal_code = $_POST['postal_code'];
+    $postal_code = $_POST['postal_code'] ? "'" . $_POST['postal_code'] . "'" : "NULL";
     $date_of_birth = $_POST['date_of_birth'];
     $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $salary = $_POST['salary'];
@@ -85,8 +85,8 @@ if (isset($_POST['update_instructor'])) {
         // Update the instructor data in the database
         $sql = "UPDATE instructor
                 SET ID='$new_ID', first_name='$first_name',
-                middle_name='$middle_name', last_name='$last_name',
-                street_number='$street_number', street_name='$street_name', apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name=$dept_name,
+                middle_name=$middle_name, last_name='$last_name',
+                street_number='$street_number', street_name=$street_name, apt_number='$apt_number', city='$city', state='$state', postal_code='$postal_code', date_of_birth='$date_of_birth', dept_name=$dept_name,
                 salary='$salary' WHERE ID='$ID'";
 
         if ($conn->query($sql) === TRUE) {

@@ -187,7 +187,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-first_name" name="first_name" required><br><br>
 
                     <label for="edit-middle_name">Middle Name:</label>
-                    <input type="text" id="edit-middle_name" name="middle_name" required><br><br>
+                    <input type="text" id="edit-middle_name" name="middle_name"><br><br>
 
                     <label for="edit-last_name">Last Name:</label>
                     <input type="text" id="edit-last_name" name="last_name" required><br><br>

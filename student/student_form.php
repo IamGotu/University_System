@@ -67,7 +67,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="first_name" name="first_name" required><br><br>
 
                     <label for="middle_name">Middle Name:</label>
-                    <input type="text" id="middle_name" name="middle_name" required><br><br>
+                    <input type="text" id="middle_name" name="middle_name"><br><br>
 
                     <label for="last_name">Last Name:</label>
                     <input type="text" id="last_name" name="last_name" required><br><br>
@@ -113,7 +113,7 @@ if ($result_departments->num_rows > 0) {
                         <tr>
                             <td style="text-align: center;"><?php echo $row['ID']; ?></td>    
                             <td style="text-align: center;"><?php echo $row['first_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['middle_name']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['middle_name'] ? $row['middle_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['last_name']; ?></td>
                             <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['tot_cred']; ?></td>
@@ -150,7 +150,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-first_name" name="first_name" required><br><br>
 
                     <label for="edit-middle_name">Middle Name:</label>
-                    <input type="text" id="edit-middle_name" name="middle_name" required><br><br>
+                    <input type="text" id="edit-middle_name" name="middle_name"><br><br>
 
                     <label for="edit-last_name">Last Name:</label>
                     <input type="text" id="edit-last_name" name="last_name" required><br><br>

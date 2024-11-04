@@ -67,19 +67,19 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="first_name" name="first_name" required><br><br>
 
                     <label for="middle_name">Middle Name:</label>
-                    <input type="text" id="middle_name" name="middle_name" required><br><br>
+                    <input type="text" id="middle_name" name="middle_name"><br><br>
 
                     <label for="last_name">Last Name:</label>
                     <input type="text" id="last_name" name="last_name" required><br><br>
 
                     <label for="street_number">Street Number:</label>
-                    <input type="number" id="street_number" name="street_number" required><br><br>
+                    <input type="number" id="street_number" name="street_number"><br><br>
 
                     <label for="street_name">Street Name:</label>
-                    <input type="text" id="street_name" name="street_name" required><br><br>
+                    <input type="text" id="street_name" name="street_name"><br><br>
 
                     <label for="apt_number">Apartment Number:</label>
-                    <input type="number" id="apt_number" name="apt_number" required><br><br>
+                    <input type="number" id="apt_number" name="apt_number"><br><br>
 
                     <label for="city">City:</label>
                     <input type="text" id="city" name="city" required><br><br>
@@ -88,7 +88,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="state" name="state" required><br><br>
 
                     <label for="postal_code">Postal Code:</label>
-                    <input type="number" id="postal_code" name="postal_code" required><br><br>
+                    <input type="number" id="postal_code" name="postal_code"><br><br>
 
                     <label for="date_of_birth">Date of Birth:</label>
                     <input type="date" id="date_of_birth" name="date_of_birth" required><br><br>
@@ -141,14 +141,14 @@ if ($result_departments->num_rows > 0) {
                         <tr>
                             <td style="text-align: center;"><?php echo $row['ID']; ?></td>    
                             <td style="text-align: center;"><?php echo $row['first_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['middle_name']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['middle_name'] ? $row['middle_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['last_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['street_number']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['street_name']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['apt_number']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['street_number'] ? $row['street_number'] : 'N/A'; ?></td>
+                            <td style="text-align: center;"><?php echo $row['street_name'] ? $row['street_name'] : 'N/A'; ?></td>
+                            <td style="text-align: center;"><?php echo $row['apt_number'] ? $row['apt_number'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['city']; ?></td>
                             <td style="text-align: center;"><?php echo $row['state']; ?></td>
-                            <td style="text-align: center;"><?php echo $row['postal_code']; ?></td>
+                            <td style="text-align: center;"><?php echo $row['postal_code'] ? $row['postal_code'] : 'N/A'; ?></td>
                             <td style="text-align: center;"><?php echo $row['date_of_birth']; ?></td>
                             <td style="text-align: center;"><?php echo !empty($row['dept_name']) ? $row['dept_name'] : 'N/A'; ?></td>
                             <td style="text-align: center;">
@@ -193,13 +193,13 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-last_name" name="last_name" required><br><br>
 
                     <label for="edit-street_number">Street Number:</label>
-                    <input type="number" id="edit-street_number" name="street_number" required><br><br>
+                    <input type="number" id="edit-street_number" name="street_number"><br><br>
 
                     <label for="edit-street_name">Street Name:</label>
-                    <input type="text" id="edit-street_name" name="street_name" required><br><br>
+                    <input type="text" id="edit-street_name" name="street_name"><br><br>
 
                     <label for="edit-apt_number">Apartment Number:</label>
-                    <input type="number" id="edit-apt_number" name="apt_number" required><br><br>
+                    <input type="number" id="edit-apt_number" name="apt_number"><br><br>
 
                     <label for="edit-city">City:</label>
                     <input type="text" id="edit-city" name="city" required><br><br>
@@ -208,7 +208,7 @@ if ($result_departments->num_rows > 0) {
                     <input type="text" id="edit-state" name="state" required><br><br>
 
                     <label for="edit-postal_code">Postal Code:</label>
-                    <input type="number" id="edit-postal_code" name="postal_code" required><br><br>
+                    <input type="number" id="edit-postal_code" name="postal_code"><br><br>
 
                     <label for="edit-date_of_birth">Date of Birth:</label>
                     <input type="date" id="edit-date_of_birth" name="date_of_birth" required><br><br>

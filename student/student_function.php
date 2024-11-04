@@ -9,7 +9,7 @@ include("../database/db_connect.php");
 if (isset($_POST['add_student'])) {
     $ID = $_POST['ID'];
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
+    $middle_name = $_POST['middle_name'] ? "'" . $_POST['middle_name'] . "'" : "NULL";;
     $last_name = $_POST['last_name'];
     $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $tot_cred = $_POST['tot_cred'];
@@ -24,7 +24,7 @@ if (isset($_POST['add_student'])) {
         $_SESSION['message'] = 'Student already exists';
     } else {
         // Insert the new student into the database
-        $sql = "INSERT INTO student (ID, first_name, middle_name, last_name, dept_name, tot_cred) VALUES ('$ID', '$first_name', '$middle_name', '$last_name', $dept_name, '$tot_cred')";
+        $sql = "INSERT INTO student (ID, first_name, middle_name, last_name, dept_name, tot_cred) VALUES ('$ID', '$first_name', $middle_name, '$last_name', $dept_name, '$tot_cred')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Student added successfully';
@@ -42,7 +42,7 @@ if (isset($_POST['update_student'])) {
     $ID = $_POST['ID']; // Current ID
     $new_ID = $_POST['new_ID']; // New ID
     $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
+    $middle_name = $_POST['middle_name'] ? "'" . $_POST['middle_name'] . "'" : "NULL";;
     $last_name = $_POST['last_name'];
     $dept_name = !empty($_POST['dept_name']) ? "'" . $_POST['dept_name'] . "'" : "NULL";
     $tot_cred = $_POST['tot_cred'];
@@ -54,7 +54,7 @@ if (isset($_POST['update_student'])) {
     // Only proceed if the new ID does not exist
     if ($check_result->num_rows === 0) {
         // Update the student data in the database
-        $sql = "UPDATE student SET ID='$new_ID', first_name='$first_name', middle_name='$middle_name', last_name='$last_name', dept_name=$dept_name, tot_cred='$tot_cred' WHERE ID='$ID'";
+        $sql = "UPDATE student SET ID='$new_ID', first_name='$first_name', middle_name=$middle_name, last_name='$last_name', dept_name=$dept_name, tot_cred='$tot_cred' WHERE ID='$ID'";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['status'] = 'success';
             $_SESSION['message'] = 'Student updated successfully';
